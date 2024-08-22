@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Almein Beach Front Tower C2</title>
+    <link rel="stylesheet" href="property-styles.css">
+    <style>
+        /* Default background color */
+        body {
+            transition: background-color 0.3s ease;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const typeSelect = document.getElementById('type');
+            const floorSelect = document.getElementById('floor');
+            const detailsDiv = document.getElementById('details');
+            const body = document.body; // Select the body element
+
+            // Map apartment types to background colors
+            const backgroundColors = {
+                '2 BED': '#98fb98',       // Pale Green
+                '3 BED': '#add8e6',       // Light Blue
+                '4 BED': '#ffb6c1',       // Light Pink
+            };
+
+            const propertyDetails = {
+                '2 BED': `
+                    <ul>
+                        <li>Starting Price:</li>
+                        <ul>
+                            <li>Cash: 16,858,000 for 215 Sqm</li>
+                            <li>Cash: 16,864,000 for 217 Sqm</li>
+                            <li>3Y Plan: 22,679,000</li>
+                            <li>5Y Plan: 26,587,000</li>
+                            <li>7Y Plan: 30,651,000</li>
+                            <li>10Y Plan: 37,494,000</li>
+                        </ul>
+                    </ul>`,
+                '3 BED': `
+                    <ul>
+                        <li>Starting Price 8.8M</li>
+                    </ul>`,
+                '4 BED': `
+                    <ul>
+                        <li>Starting Price:</li>
+                        <ul>
+                            <li>Cash: 61,375,000</li>
+                            <li>3Y Plan: 82,539,000</li>
+                            <li>5Y Plan: 96,761,000</li>
+                            <li>7Y Plan: 111,553,000</li>
+                            <li>10Y Plan: 136,455,000</li>
+                        </ul>
+                        <li>Available only on 22nd floor (678 Sqm)</li>
+                    </ul>`
+            };
+
+            const availability = {
+                '2 BED': ['G (7Apts)', '1 (4Apts)', '2 (6Apts)', '3 (4Apts)', '4 (7Apts)', '5 (5Apts)', '6 (7Apts)', '7 (4Apts)', '8 (5Apts)', '9 (2Apts)', '10 (3Apts)'],
+                '3 BED': ['G (7Apts)', '2 (6Apts)', '4 (7Apts)'],
+                '4 BED': ['22 (3Apts)'],
+            };
+
+            typeSelect.addEventListener('change', function() {
+                const selectedType = typeSelect.value;
+                floorSelect.innerHTML = '<option value="">--Choose floor no.--</option>';
+
+                if (selectedType && availability[selectedType]) {
+                    availability[selectedType].forEach(floor => {
+                        const option = document.createElement('option');
+                        option.value = floor;
+                        option.textContent = floor;
+                        floorSelect.appendChild(option);
+                    });
+                } else {
+                    for (let i = 0; i < floorSelect.options.length; i++) {
+                        floorSelect.options[i].style.display = '';
+                    }
+                }
+
+                if (selectedType) {
+                    detailsDiv.innerHTML = propertyDetails[selectedType];
+                    body.style.backgroundColor = backgroundColors[selectedType]; // Change background color
+                } else {
+                    detailsDiv.innerHTML = '';
+                    body.style.backgroundColor = ''; // Reset background color if none selected
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Al-Almein Beach Front Tower C2</h1>
+        <form id="propertyForm">
+            <label for="type">Choose Type:</label>
+            <select id="type" required>
+                <option value="">--Choose a type--</option>
+                <option value="2 BED">2 BED</option>
+                <option value="3 BED">3 BED</option>
+                <option value="4 BED">4 BED</option>
+            </select>
+
+            <label for="floor">Floor No.:</label>
+            <select id="floor" required>
+                <option value="">--Choose floor no.--</option>
+                <option value="G (7Apts)">G (7Apts)</option>
+                <option value="1 (4Apts)">1 (4Apts)</option>
+                <option value="2 (6Apts)">2 (6Apts)</option>
+                <option value="3 (4Apts)">3 (4Apts)</option>
+                <option value="4 (7Apts)">4 (7Apts)</option>
+                <option value="5 (5Apts)">5 (5Apts)</option>
+                <option value="6 (7Apts)">6 (7Apts)</option>
+                <option value="7 (4Apts)">7 (4Apts)</option>
+                <option value="8 (5Apts)">8 (5Apts)</option>
+                <option value="9 (2Apts)">9 (2Apts)</option>
+                <option value="10 (3Apts)">10 (3Apts)</option>
+                <option value="22 (3Apts)">22 (3Apts)</option>
+            </select>
+
+            <label for="details">Details:</label>
+            <div id="details"></div>
+        </form>
+    </div>
+</body>
+</html>
